@@ -1,0 +1,36 @@
+# Sensitive local material
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+credentials/
+
+# Raw security outputs that may contain lab identifiers or session data
+raw/
+raw-output/
+scan-output/
+*.har
+*.session
+*.cookie
+
+# Archives / dumps
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.sql
+*.dump
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
