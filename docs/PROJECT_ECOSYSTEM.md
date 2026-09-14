@@ -1,6 +1,6 @@
 # DevSecOps Project Ecosystem
 
-This portfolio repository focuses on the **OJS security-assessment workstream**, but the original `dso-1` organization contains a broader set of group deliverables. This document records that wider project boundary so a reviewer can understand the complete engineering context without mixing unrelated source trees into one repository.
+This portfolio repository focuses on the **OJS security-assessment workstream**, but the original `dso-1` organization contains a broader set of group deliverables. The wider project is now represented by three separate personal portfolio case studies so reviewers can understand the complete engineering context without mixing unrelated source trees into one repository.
 
 ## High-level view
 
@@ -34,7 +34,7 @@ flowchart TD
 
 ## 1. OJS security assessment
 
-**Primary portfolio case study:** this repository.
+**Personal portfolio:** https://github.com/syifaniads/ojs-devsecops-security-assessment
 
 Original repositories:
 
@@ -44,99 +44,56 @@ Original repositories:
 4. `dso-1/Pertemuan-4-Analisis-OWASP-Risk-Scoring`
 5. `dso-1/Pertemuan-5-Finalisasi-Laporan-Rekomendasi-Mitigasi`
 
-The workstream covers the full assessment lifecycle: authorized lab setup, scope and rules of engagement, asset classification, attack-surface mapping, STRIDE threat modeling, SAST, DAST, manual validation, CVSS analysis, business-risk prioritization, mitigation planning, and re-testing.
+The workstream covers authorized lab setup, scope and rules of engagement, asset classification, attack-surface mapping, STRIDE threat modeling, SAST, DAST, manual validation, CVSS analysis, business-risk prioritization, mitigation planning, and re-testing.
 
-See the repository root documents for the curated version of this work.
+## 2. Go Reserve application + deployment
 
-## 2. Go Reserve application
+**Personal portfolio:** https://github.com/syifaniads/go-reserve-devsecops-platform
 
-Original source:
+Original sources:
 
 - https://github.com/dso-1/kelompok1_website
-- a later copy/integration also exists under `dso-1/project/app-web`
+- https://github.com/dso-1/project (`app-web/` plus Jenkins/CI/CD material)
 
-The original README describes **Go Reserve** as a room-reservation system built with:
+Go Reserve is a collaborative room-reservation system built with TanStack Start, React/TypeScript, Prisma and PostgreSQL. The product scope includes authentication, role-specific dashboards, room management, reservation workflows, user administration, and server-side reservation conflict validation.
 
-- TanStack Start
-- TypeScript
-- Prisma ORM
-- PostgreSQL
-- TanStack Query
-- Tailwind CSS / Shadcn UI
-- Vitest / React Testing Library
-- Biome and Husky
+The related delivery workflow uses Jenkins and Docker to build an application image, transfer it to a remote VM, replace the running container, run Prisma database setup, and verify the deployed service.
 
-Feature scope includes authentication, role-specific dashboards, room management, reservations, user administration, and public-facing pages.
+The personal portfolio mirror preserves representative source, the Prisma data model, authentication/reservation/dashboard services, Docker setup, a sanitized Jenkins pipeline, architecture documentation, and explicit team attribution.
 
-This repository does **not** duplicate the full Go Reserve source because it is a distinct application and group-authored codebase. It is linked here to preserve the complete DevSecOps project story.
-
-## 3. CI/CD and deployment engineering
-
-Original source:
-
-- https://github.com/dso-1/project
-
-The repository contains a Jenkins pipeline, Dockerized application components, deployment material, and a multi-project CI/CD architecture presentation.
-
-The Jenkins pipeline demonstrates the following deployment sequence:
-
-```mermaid
-flowchart LR
-    A[Checkout] --> B[Docker Build]
-    B --> C[Save / Transfer Image]
-    C --> D[Remote VM]
-    D --> E[Load Image]
-    E --> F[Replace Container]
-    F --> G[Run DB Migration / Seed]
-    G --> H[HTTP Verification]
-```
-
-A sanitized example of the pipeline is preserved at [`../artifacts/ci-cd/Jenkinsfile.example`](../artifacts/ci-cd/Jenkinsfile.example).
-
-A directly attributable commit from `syifaniads` in this repository adds the multi-project CI/CD architecture presentation:
+A directly attributable commit from `syifaniads` in the broader project adds the multi-project CI/CD architecture presentation:
 
 - https://github.com/dso-1/project/commit/961df611d3c6fa2b708e93c054148c19379d5098
 
-## 4. LLM vs Semgrep SAST experiment
+## 3. LLM vs Semgrep SAST experiment
+
+**Personal portfolio:** https://github.com/syifaniads/llm-semgrep-sast-comparison
 
 Original source:
 
 - https://github.com/dso-1/sast-llm
 
-The repository implements a hands-on comparison between an LLM-based SAST analyzer and Semgrep. The project contains:
+This collaborative security-tooling project compares LLM-assisted static analysis with Semgrep. It includes intentionally vulnerable Python/JavaScript samples, an LLM-based analyzer, custom Semgrep rules, normalized output, comparison/report logic and an orchestration script.
 
-- intentionally vulnerable Python and JavaScript samples;
-- an LLM-based analyzer;
-- prompt templates;
-- Semgrep rules and runner scripts;
-- comparison logic and HTML reporting;
-- an orchestration script to run both approaches.
+The personal mirror separates this work from the Go Reserve application even though later history in the organization repository also contains application material. That keeps the recruiter story focused on SAST design, trade-offs, false-positive/false-negative reasoning, determinism, explainability, cost and CI/CD suitability.
 
-The experiment compares characteristics such as speed, cost, reproducibility, contextual reasoning, false positives, CI/CD suitability, and remediation quality.
+## Portfolio separation
 
-This is relevant to the portfolio because it extends the project from **using SAST tools** into **understanding and comparing how SAST approaches work**.
-
-## Repository boundary
-
-The portfolio deliberately separates three things:
-
-| Category | Treatment in this repository |
-|---|---|
-| OJS assessment artifacts | curated and documented in depth |
-| Small non-sensitive technical artifacts | selectively preserved as examples |
-| Full group application/tooling source | linked to original repository rather than duplicated wholesale |
-
-This boundary keeps the portfolio readable for recruiters while preserving traceability to the original organization.
+| Workstream | Personal repository | Primary story |
+|---|---|---|
+| OJS assessment | `syifaniads/ojs-devsecops-security-assessment` | AppSec / DevSecOps assessment |
+| Go Reserve + CI/CD | `syifaniads/go-reserve-devsecops-platform` | Full-stack + deployment engineering |
+| LLM vs Semgrep | `syifaniads/llm-semgrep-sast-comparison` | Security tooling / AI-assisted SAST |
 
 ## Attribution note
 
-Some project work was performed from shared or other team laptops, so the historical Git author identity does not always map cleanly to the person who performed the work. GitHub author filters therefore should **not** be treated as the only measure of contribution.
+These are collaborative team outputs, not solo projects. Some work was performed from shared or other team laptops, so historical Git author identity does not always map cleanly to the person who performed the work. GitHub author filters therefore should not be treated as the only measure of contribution.
 
-For this reason, this portfolio distinguishes between:
+The portfolio uses multiple evidence types:
 
 1. **directly attributable evidence** — commits/issues linked to `syifaniads`;
-2. **task/artifact evidence** — work substantiated by issue assignment, report attribution, or deliverable ownership;
-3. **team-level outputs** — repositories and artifacts produced collaboratively;
-4. **shared-device history** — commits whose local Git identity may reflect the laptop configuration rather than the actual contributor.
+2. **task/artifact evidence** — work substantiated by issue assignment, report attribution, deliverable ownership or team records;
+3. **team-level output** — applications, pipelines and tools produced collaboratively;
+4. **shared-device context** — acknowledgment that local Git identity can differ from the actual person using the device.
 
-No specific commit under another person's identity is reassigned to the portfolio owner without an independent basis for doing so.
+No specific commit under another person's identity is reassigned to the portfolio owner without independent support. The personal mirrors instead present the relevant work as collaborative project experience and link to original organization history for transparency.
