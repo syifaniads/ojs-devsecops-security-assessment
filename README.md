@@ -20,6 +20,7 @@ A portfolio case study of an **authorized vulnerability assessment of Open Journ
 | Recommended remediation | [MITIGATION.md](./MITIGATION.md) |
 | Re-testing approach | [VERIFICATION.md](./VERIFICATION.md) |
 | Architecture / attack surface | [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) |
+| CIA + STRIDE threat model | [docs/THREAT_MODEL.md](./docs/THREAT_MODEL.md) |
 | Positive + negative test coverage | [docs/TEST_MATRIX.md](./docs/TEST_MATRIX.md) |
 | My specific contribution | [CONTRIBUTIONS.md](./CONTRIBUTIONS.md) |
 | Original team repositories and commit proof | [docs/SOURCE_EVIDENCE.md](./docs/SOURCE_EVIDENCE.md) |
