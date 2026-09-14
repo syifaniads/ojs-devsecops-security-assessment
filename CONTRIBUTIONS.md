@@ -1,10 +1,24 @@
 # My Contribution
 
-This assessment was completed by **Kelompok 1**, a seven-person DevSecOps team. My documented team role was **Security Engineer (SAST)**. This page separates my contribution from the wider team output so that the repository can be evaluated as a portfolio artifact without implying solo authorship.
+This assessment was completed by **Kelompok 1**, a seven-person DevSecOps team. I served as **Group Lead (Ketua Kelompok)** while also working technically as a **Security Engineer (SAST)**.
 
-## Responsibilities I can substantiate
+The original kickoff role matrix explicitly records my technical role as **Security Engineer (SAST)**. This portfolio additionally records my group-lead responsibility so that both dimensions of my work are represented without implying solo authorship.
 
-My work covered the following areas:
+## Leadership responsibilities
+
+As group lead, I was responsible for helping the team keep the assessment organized across multiple stages and repositories. My coordination work included:
+
+- aligning weekly deliverables with the assessment lifecycle;
+- coordinating work across SAST, DAST, documentation, risk analysis, and final reporting;
+- reviewing progress and helping resolve gaps between artifacts;
+- keeping outputs consistent enough to be consolidated into the final assessment package;
+- helping ensure that findings, evidence, risk treatment, and mitigation material were carried forward between stages.
+
+This was a collaborative project, so leadership here means **coordination and delivery ownership**, not individual authorship of every finding or artifact.
+
+## Technical responsibilities I can substantiate
+
+My technical work covered the following areas:
 
 - static source-code review using **Semgrep** and manual inspection;
 - REST API and admin-panel attack-surface analysis;
@@ -54,17 +68,16 @@ For broader history, GitHub's author filter can be used on each original reposit
 
 ## Team attribution
 
-The original team role document lists:
+The original team artifacts distribute work across coordination, SAST, DAST, and documentation/reporting responsibilities. My kickoff-role entry records **Security Engineer (SAST)**, while I also acted as **Ketua Kelompok / Group Lead** for the team.
 
-| Role | Team coverage |
-|---|---|
-| Project Lead / Scrum Master | coordination and final review |
-| Security Engineers — SAST | source analysis and SAST activities |
-| Security Engineers — DAST | dynamic scanning and validation |
-| Documentation & Reporting | final reporting, risk and mitigation documentation |
+This portfolio therefore distinguishes between:
 
-This portfolio therefore distinguishes between **team findings** and **my directly attributable work** instead of presenting every artifact as individually authored.
+- **team output** — collaborative findings, scans, reports, and final mitigation artifacts;
+- **my leadership contribution** — coordination, continuity between stages, and delivery oversight;
+- **my technical contribution** — directly attributable SAST/API/authentication-analysis work and selected findings.
+
+That separation is intentional so a reviewer can evaluate both leadership and hands-on security work without treating every team artifact as individually authored.
 
 ## What I would improve in a production assessment
 
-If repeating the engagement in a professional environment, I would strengthen the evidence chain by assigning a stable finding ID from discovery through remediation, storing sanitized raw tool output with hashes, separating scanner observations from manually validated vulnerabilities, and tracking each mitigation through an explicit retest result. Those improvements are reflected in how this portfolio repository is organized.
+If repeating the engagement in a professional environment, I would strengthen the evidence chain by assigning a stable finding ID from discovery through remediation, storing sanitized raw tool output with hashes, separating scanner observations from manually validated vulnerabilities, and tracking each mitigation through an explicit retest result. I would also formalize work ownership with a single issue board and review checkpoints so that coordination decisions are preserved alongside technical evidence.
