@@ -23,9 +23,11 @@ A portfolio case study of an **authorized vulnerability assessment of Open Journ
 | Recommended remediation | [MITIGATION.md](./MITIGATION.md) |
 | Re-testing approach and limitations | [VERIFICATION.md](./VERIFICATION.md) |
 | My specific contribution | [CONTRIBUTIONS.md](./CONTRIBUTIONS.md) |
-| Original team repositories and commit proof | [docs/SOURCE_EVIDENCE.md](./docs/SOURCE_EVIDENCE.md) |
-| Complete organization artifact inventory | [docs/ORIGINAL_ARTIFACT_INVENTORY.md](./docs/ORIGINAL_ARTIFACT_INVENTORY.md) |
+| Original repositories and source evidence | [docs/SOURCE_EVIDENCE.md](./docs/SOURCE_EVIDENCE.md) |
+| Complete DevSecOps project ecosystem | [docs/PROJECT_ECOSYSTEM.md](./docs/PROJECT_ECOSYSTEM.md) |
+| Original artifact inventory | [docs/ORIGINAL_ARTIFACT_INVENTORY.md](./docs/ORIGINAL_ARTIFACT_INVENTORY.md) |
 | Curated Semgrep rule artifact | [artifacts/semgrep/custom_rules.yaml](./artifacts/semgrep/custom_rules.yaml) |
+| Sanitized Jenkins deployment example | [artifacts/ci-cd/Jenkinsfile.example](./artifacts/ci-cd/Jenkinsfile.example) |
 | Security / disclosure policy | [SECURITY.md](./SECURITY.md) |
 
 ## Assessment lifecycle
@@ -96,19 +98,28 @@ Examples of findings attributed to me in the final report include:
 - `VUL-014` — Potential Insecure Deserialization
 - `VUL-015` — Potential Command Injection (`exec` / `popen`)
 
-## Curated technical artifact
+## Curated technical artifacts
 
-The original SAST repository contains a small set of custom Semgrep rules for PHP patterns such as variable-driven `eval`, `unserialize`, and dynamic include/require usage. A non-sensitive copy is preserved at [`artifacts/semgrep/custom_rules.yaml`](./artifacts/semgrep/custom_rules.yaml) so a reviewer can inspect a real technical artifact without opening raw scan archives.
+The personal portfolio preserves a few small, non-sensitive examples rather than copying every raw team artifact:
 
-## Broader DevSecOps work in the organization
+- [`artifacts/semgrep/custom_rules.yaml`](./artifacts/semgrep/custom_rules.yaml) — PHP Semgrep rules used for source review patterns such as `eval`, `unserialize`, and dynamic include/require usage.
+- [`artifacts/ci-cd/Jenkinsfile.example`](./artifacts/ci-cd/Jenkinsfile.example) — sanitized version of the team's Jenkins build, image-transfer, remote deployment, database setup, and verification workflow.
 
-The five OJS repositories are **not the only project repositories in the organization**. A complete audit also found related group engineering work:
+## Broader DevSecOps project ecosystem
 
-- [`dso-1/project`](https://github.com/dso-1/project) — multi-project DevSecOps repository with Jenkins-based container build/deploy flow, Docker material, a Python app, and a larger web application;
+The five OJS assessment repositories are only one part of the group's wider DevSecOps work. The same organization also contains:
+
+- [`dso-1/project`](https://github.com/dso-1/project) — Jenkins/Docker deployment engineering, application code, and multi-project CI/CD architecture material;
 - [`dso-1/kelompok1_website`](https://github.com/dso-1/kelompok1_website) — **Go Reserve**, a room-reservation system built with TanStack Start, TypeScript, Prisma, and PostgreSQL;
-- [`dso-1/sast-llm`](https://github.com/dso-1/sast-llm) — a separate hands-on project comparing LLM-based SAST with Semgrep.
+- [`dso-1/sast-llm`](https://github.com/dso-1/sast-llm) — a hands-on comparison of LLM-based SAST and Semgrep, including vulnerable samples, analysis tooling, and result comparison.
 
-These are documented in [docs/ORIGINAL_ARTIFACT_INVENTORY.md](./docs/ORIGINAL_ARTIFACT_INVENTORY.md). They are referenced here rather than copied wholesale because their code authorship is distributed across the group and they are distinct case studies from the OJS assessment.
+The relationship between these workstreams is documented in [docs/PROJECT_ECOSYSTEM.md](./docs/PROJECT_ECOSYSTEM.md).
+
+## Commit-attribution caveat
+
+Some of my project work was performed from a **shared / other team laptop**. In those cases, the local Git author identity can reflect the laptop's Git configuration rather than the person who actually performed the work. As a result, filtering GitHub history only by `author:syifaniads` can undercount my contribution.
+
+This portfolio therefore uses multiple evidence types: direct commits under my account, assigned issues, report-level attribution, artifact ownership, and team-level project history. I do **not** reassign a specific commit recorded under another person's identity to myself unless there is an independent basis for doing so. The evidence model is documented in [docs/SOURCE_EVIDENCE.md](./docs/SOURCE_EVIDENCE.md).
 
 ## Repository design
 
@@ -120,7 +131,7 @@ All testing described here was performed against an authorized lab target. Host 
 
 ## Original collaborative work
 
-The core assessment was completed across five repositories covering kickoff/scope, attack-surface mapping, SAST/DAST, risk scoring, and final reporting. The broader organization also contains separate group engineering repositories. Links, contribution proof, and repository boundaries are collected in [docs/SOURCE_EVIDENCE.md](./docs/SOURCE_EVIDENCE.md) and [docs/ORIGINAL_ARTIFACT_INVENTORY.md](./docs/ORIGINAL_ARTIFACT_INVENTORY.md).
+The core assessment was completed across five repositories covering kickoff/scope, attack-surface mapping, SAST/DAST, risk scoring, and final reporting. The broader organization also contains separate application, CI/CD, and security-tooling workstreams. Links, contribution proof, repository boundaries, and attribution caveats are collected in [docs/SOURCE_EVIDENCE.md](./docs/SOURCE_EVIDENCE.md), [docs/PROJECT_ECOSYSTEM.md](./docs/PROJECT_ECOSYSTEM.md), and [docs/ORIGINAL_ARTIFACT_INVENTORY.md](./docs/ORIGINAL_ARTIFACT_INVENTORY.md).
 
 ---
 
