@@ -89,7 +89,7 @@ I served as **Group Lead (Ketua Kelompok) and Security Engineer (SAST)** within 
 
 My leadership responsibilities included coordinating the team's assessment stages, keeping deliverables aligned across meetings, reviewing progress and documentation, and helping consolidate outputs into the final assessment package. My technical work focused on OJS lab setup/documentation, source-code analysis, REST API and admin attack-surface review, authentication data-flow analysis, vulnerability documentation, and contributions to SAST/DAST and final reporting artifacts.
 
-The original kickoff role matrix records my technical role as **Security Engineer (SAST)**. The same matrix separately labels another teammate as **Project Lead / Scrum Master**; this portfolio uses **Ketua Kelompok / Group Lead** to describe my team-coordination responsibility while keeping that original role matrix linked for transparency. See [CONTRIBUTIONS.md](./CONTRIBUTIONS.md) and [docs/SOURCE_EVIDENCE.md](./docs/SOURCE_EVIDENCE.md).
+The original kickoff role matrix records my technical role as **Security Engineer (SAST)**. The same matrix separately labels another teammate as **Project Lead / Scrum Master**; this portfolio uses **Ketua Kelompok / Group Lead** to describe my team-coordination responsibility while keeping that original role matrix linked for transparency.
 
 Examples of findings attributed to me in the final report include:
 
@@ -100,38 +100,39 @@ Examples of findings attributed to me in the final report include:
 
 ## Curated technical artifacts
 
-The personal portfolio preserves a few small, non-sensitive examples rather than copying every raw team artifact:
-
-- [`artifacts/semgrep/custom_rules.yaml`](./artifacts/semgrep/custom_rules.yaml) — PHP Semgrep rules used for source review patterns such as `eval`, `unserialize`, and dynamic include/require usage.
-- [`artifacts/ci-cd/Jenkinsfile.example`](./artifacts/ci-cd/Jenkinsfile.example) — sanitized version of the team's Jenkins build, image-transfer, remote deployment, database setup, and verification workflow.
+- [`artifacts/semgrep/custom_rules.yaml`](./artifacts/semgrep/custom_rules.yaml) — PHP Semgrep rules used for source-review patterns.
+- [`artifacts/ci-cd/Jenkinsfile.example`](./artifacts/ci-cd/Jenkinsfile.example) — sanitized example of the team's build/deploy/verify workflow.
 
 ## Broader DevSecOps project ecosystem
 
-The five OJS assessment repositories are only one part of the group's wider DevSecOps work. The same organization also contains:
+The OJS assessment was one workstream inside a broader collaborative project. I split the related work into separate portfolio case studies so each engineering story is easy to review:
 
-- [`dso-1/project`](https://github.com/dso-1/project) — Jenkins/Docker deployment engineering, application code, and multi-project CI/CD architecture material;
-- [`dso-1/kelompok1_website`](https://github.com/dso-1/kelompok1_website) — **Go Reserve**, a room-reservation system built with TanStack Start, TypeScript, Prisma, and PostgreSQL;
-- [`dso-1/sast-llm`](https://github.com/dso-1/sast-llm) — a hands-on comparison of LLM-based SAST and Semgrep, including vulnerable samples, analysis tooling, and result comparison.
+- **Go Reserve DevSecOps Platform** — https://github.com/syifaniads/go-reserve-devsecops-platform  
+  Collaborative TanStack Start / TypeScript / Prisma / PostgreSQL room-reservation application with Docker and Jenkins delivery artifacts.
+- **LLM vs Semgrep SAST Comparison** — https://github.com/syifaniads/llm-semgrep-sast-comparison  
+  Collaborative security-tooling experiment with an LLM analyzer, custom Semgrep rules, vulnerable fixtures, normalization and comparison logic.
 
-The relationship between these workstreams is documented in [docs/PROJECT_ECOSYSTEM.md](./docs/PROJECT_ECOSYSTEM.md).
+The original organization sources remain:
+
+- https://github.com/dso-1/project
+- https://github.com/dso-1/kelompok1_website
+- https://github.com/dso-1/sast-llm
+
+See [docs/PROJECT_ECOSYSTEM.md](./docs/PROJECT_ECOSYSTEM.md) for the relationship among these workstreams.
 
 ## Commit-attribution caveat
 
-Some of my project work was performed from a **shared / other team laptop**. In those cases, the local Git author identity can reflect the laptop's Git configuration rather than the person who actually performed the work. As a result, filtering GitHub history only by `author:syifaniads` can undercount my contribution.
+Some project work was performed from a **shared / other team laptop**. In those cases, the local Git author identity can reflect the laptop's Git configuration rather than the person who actually performed the work. As a result, filtering GitHub history only by `author:syifaniads` can undercount my contribution.
 
-This portfolio therefore uses multiple evidence types: direct commits under my account, assigned issues, report-level attribution, artifact ownership, and team-level project history. I do **not** reassign a specific commit recorded under another person's identity to myself unless there is an independent basis for doing so. The evidence model is documented in [docs/SOURCE_EVIDENCE.md](./docs/SOURCE_EVIDENCE.md).
+This portfolio therefore uses multiple evidence types: direct commits under my account, assigned issues, report-level attribution, artifact ownership, and team-level project history. I do **not** reassign a specific commit recorded under another person's identity to myself unless there is an independent basis for doing so.
 
 ## Repository design
 
-This repository intentionally **does not mirror the entire OJS codebase, every raw scan artifact, or unrelated group application source**. It is structured as an engineering portfolio: concise findings, methodology, evidence links, sanitized examples, and explicit attribution. Raw team artifacts remain referenced in the original organization repositories where contribution history is preserved.
+This repository intentionally does not mirror the entire OJS codebase or every raw scanner artifact. It is structured as an engineering case study: concise findings, methodology, evidence links, sanitized examples, and explicit attribution. Related application and security-tooling work now live in separate personal portfolio repositories linked above.
 
 ## Ethical and security note
 
 All testing described here was performed against an authorized lab target. Host addresses, credentials, session values, and other operational secrets are intentionally omitted from this portfolio. Do not use the techniques documented here against systems without explicit authorization.
-
-## Original collaborative work
-
-The core assessment was completed across five repositories covering kickoff/scope, attack-surface mapping, SAST/DAST, risk scoring, and final reporting. The broader organization also contains separate application, CI/CD, and security-tooling workstreams. Links, contribution proof, repository boundaries, and attribution caveats are collected in [docs/SOURCE_EVIDENCE.md](./docs/SOURCE_EVIDENCE.md), [docs/PROJECT_ECOSYSTEM.md](./docs/PROJECT_ECOSYSTEM.md), and [docs/ORIGINAL_ARTIFACT_INVENTORY.md](./docs/ORIGINAL_ARTIFACT_INVENTORY.md).
 
 ---
 
