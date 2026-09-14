@@ -20,13 +20,17 @@ https://github.com/dso-1/Pertemuan-5-Finalisasi-Laporan-Rekomendasi-Mitigasi/blo
 
 The portfolio documentation in this repository is a curated interpretation of that report and the original project repositories. Where the source report is inconsistent, this repository states the limitation rather than presenting an invented correction.
 
-## Team-role evidence
+## Role evidence and clarification
 
 The original kickoff repository includes the team-role document:
 
 https://github.com/dso-1/Pertemuan-1-Kickoff-Case-1-Vulnerability-OJS/blob/main/2_Daftar_Anggota_Tim_dan_Peran.md
 
-It records **Syifani Adillah Salsabila** as **Security Engineer (SAST)**.
+That artifact records **Syifani Adillah Salsabila** as **Security Engineer (SAST)**.
+
+In addition to that documented technical role, the portfolio owner states that she served as **Ketua Kelompok / Group Lead** for the project. The recruiter-facing repository therefore presents the role as **Group Lead & Security Engineer (SAST)** while keeping the original role artifact linked here for transparency.
+
+The distinction is intentional: the original role matrix is used as evidence of technical assignment, while the group-lead responsibility describes coordination ownership across the team. The portfolio does not use the leadership title to claim individual authorship of all team output.
 
 ## Assigned issue evidence
 
@@ -55,6 +59,12 @@ The following commits are examples of work authored under the `syifaniads` GitHu
 | Risk-scoring repository | https://github.com/dso-1/Pertemuan-4-Analisis-OWASP-Risk-Scoring/commit/70b77bfcdbdef4ef1384f35670d4c52d3eaf8fab |
 | Final repository cross-linking | https://github.com/dso-1/Pertemuan-5-Finalisasi-Laporan-Rekomendasi-Mitigasi/commit/6a1085e82060f8acf873e7d7ffea039888d8eff3 |
 
+## What the evidence supports
+
+The linked organization history supports direct technical contribution across kickoff/scope, attack-surface documentation, SAST/DAST artifacts, risk-scoring work, and final repository consolidation. The closed assigned issue provides especially clear evidence for API/admin review and authentication data-flow work.
+
+Leadership responsibilities are represented separately from authorship evidence. This keeps the portfolio honest about what GitHub proves directly versus what is stated as team-role context by the portfolio owner.
+
 ## Important sanitization note
 
 Some historical organization artifacts contain lab-only infrastructure values and credentials in screenshots, text files, or historical commit metadata. Those values are not reproduced in this portfolio.
@@ -68,4 +78,5 @@ When source materials disagree, the portfolio uses the following hierarchy:
 1. detailed finding section of the final report for `VUL-001`–`VUL-015` names and CVSS values;
 2. risk-register section for likelihood, impact, and business-priority values;
 3. patch-verification appendix as evidence that re-testing occurred, but not as a reliable one-to-one finding-ID map;
-4. original GitHub issues and commits for individual contribution proof.
+4. original GitHub issues and commits for individual technical contribution proof;
+5. portfolio-owner clarification for group-lead responsibility, kept distinct from direct authorship evidence.
