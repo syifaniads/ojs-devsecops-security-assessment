@@ -13,14 +13,18 @@ A portfolio case study of an **authorized vulnerability assessment of Open Journ
 
 | Area | Evidence |
 |---|---|
+| 60-second recruiter summary | [PORTFOLIO.md](./PORTFOLIO.md) |
 | Assessment workflow | [METHODOLOGY.md](./METHODOLOGY.md) |
 | Consolidated findings | [FINDINGS.md](./FINDINGS.md) |
 | CVSS and business-risk treatment | [RISK_REGISTER.md](./RISK_REGISTER.md) |
 | Recommended remediation | [MITIGATION.md](./MITIGATION.md) |
-| Re-testing approach and limitations | [VERIFICATION.md](./VERIFICATION.md) |
+| Re-testing approach | [VERIFICATION.md](./VERIFICATION.md) |
+| Architecture / attack surface | [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) |
+| Positive + negative test coverage | [docs/TEST_MATRIX.md](./docs/TEST_MATRIX.md) |
 | My specific contribution | [CONTRIBUTIONS.md](./CONTRIBUTIONS.md) |
 | Original team repositories and commit proof | [docs/SOURCE_EVIDENCE.md](./docs/SOURCE_EVIDENCE.md) |
-| Security / disclosure policy for this portfolio | [SECURITY.md](./SECURITY.md) |
+| Assessment limitations | [LIMITATIONS.md](./LIMITATIONS.md) |
+| Security / disclosure policy | [SECURITY.md](./SECURITY.md) |
 
 ## Assessment lifecycle
 
@@ -59,6 +63,7 @@ The engagement explicitly avoided destructive activity: no intentional denial of
 - SQLMap
 - Gobuster
 - WhatWeb
+- Nmap
 - Burp Suite / Postman / curl for selected manual checks
 
 **Risk analysis**
@@ -82,13 +87,13 @@ Examples of findings attributed to me in the final report include:
 - `VUL-002` — Information Disclosure / User API Exposure
 - `VUL-013` — `phpinfo()` Exposure
 - `VUL-014` — Potential Insecure Deserialization
-- `VUL-015` — Potential Command Injection (`exec` / `popen`)
+- `VUL-015` — Potential Command Injection
 
 See [CONTRIBUTIONS.md](./CONTRIBUTIONS.md) for issue and commit evidence.
 
 ## Repository design
 
-This repository intentionally **does not mirror the entire OJS codebase or every raw scan artifact**. It is structured as an engineering portfolio: concise findings, methodology, evidence links, sanitized examples, and explicit attribution. Raw team artifacts remain referenced in the original organization repositories where contribution history is preserved.
+This repository intentionally **does not mirror the entire OJS codebase or every raw scan artifact**. It is structured as an engineering portfolio: concise findings, methodology, evidence links, sanitized summaries, explicit attribution, and transparent limitations. Raw team artifacts remain referenced in the original organization repositories where contribution history is preserved.
 
 ## Ethical and security note
 
