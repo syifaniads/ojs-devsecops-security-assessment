@@ -1,0 +1,89 @@
+pipeline {
+    agent any
+
+    options {
+        disableConcurrentBuilds()
+    }
+
+    environment {
+        VM_HOST    = '<DEPLOYMENT_HOST>'
+        APP_PORT   = '8081'
+        APP_NAME   = 'app_container'
+        IMAGE_NAME = 'app_image'
+        IMAGE_TAG  = "${BUILD_NUMBER}"
+    }
+
+    stages {
+        stage('Clone') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build Image') {
+            steps {
+                dir('app-web') {
+                    sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+                }
+            }
+        }
+
+        stage('Transfer Image') {
+            steps {
+                sh "docker save ${IMAGE_NAME}:${IMAGE_TAG} | gzip > image.tar.gz"
+
+                sshagent(['<JENKINS_SSH_CREDENTIAL_ID>']) {
+                    sh """
+                    scp -o StrictHostKeyChecking=no image.tar.gz \
+                      <DEPLOY_USER>@${VM_HOST}:/tmp/
+                    """
+                }
+            }
+        }
+
+        stage('Deploy on VM') {
+            steps {
+                sshagent(['<JENKINS_SSH_CREDENTIAL_ID>']) {
+                    sh """
+                    ssh -o StrictHostKeyChecking=no <DEPLOY_USER>@${VM_HOST} '
+                        docker load < /tmp/image.tar.gz
+
+                        docker stop ${APP_NAME} || true
+                        docker rm ${APP_NAME} || true
+
+                        docker run -d \
+                            --name ${APP_NAME} \
+                            --env-file /path/to/runtime/.env \
+                            --restart unless-stopped \
+                            -p ${APP_PORT}:3000 \
+                            ${IMAGE_NAME}:${IMAGE_TAG}
+
+                        sleep 10
+
+                        docker exec ${APP_NAME} bunx prisma db push || exit 1
+                        docker exec ${APP_NAME} bun run db:seed || exit 1
+                    '
+                    """
+                }
+            }
+        }
+
+        stage('Verify') {
+            steps {
+                sh "curl -f http://${VM_HOST}:${APP_PORT} || exit 1"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment succeeded.'
+        }
+        failure {
+            echo 'Deployment failed.'
+        }
+    }
+}
+
+// Sanitized portfolio example derived from the original team Jenkins pipeline.
+// Infrastructure addresses, credential IDs, usernames, and environment paths are placeholders.
