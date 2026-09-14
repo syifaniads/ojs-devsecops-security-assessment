@@ -2,7 +2,7 @@
 
 This assessment was completed by **Kelompok 1**, a seven-person DevSecOps team. I served as **Group Lead (Ketua Kelompok)** while also working technically as a **Security Engineer (SAST)**.
 
-The original kickoff role matrix explicitly records my technical role as **Security Engineer (SAST)**. This portfolio additionally records my group-lead responsibility so that both dimensions of my work are represented without implying solo authorship.
+The original kickoff role matrix explicitly records my technical role as **Security Engineer (SAST)**. It separately lists another teammate as **Project Lead / Scrum Master**. I therefore use **Ketua Kelompok / Group Lead** in this portfolio to describe my coordination responsibility, while keeping the original matrix linked so the distinction is visible to reviewers.
 
 ## Leadership responsibilities
 
@@ -20,12 +20,21 @@ This was a collaborative project, so leadership here means **coordination and de
 
 My technical work covered the following areas:
 
+- OJS lab initialization / setup documentation;
 - static source-code review using **Semgrep** and manual inspection;
 - REST API and admin-panel attack-surface analysis;
 - authentication data-flow analysis;
 - documentation of selected findings and technical risk;
 - contributions to SAST/DAST documentation and checklist completion;
 - contributions to the final risk/reporting repository.
+
+## OJS lab setup evidence
+
+The original kickoff repository contains an **`[INIT] OJS Init`** issue assigned to `syifaniads`:
+
+- https://github.com/dso-1/Pertemuan-1-Kickoff-Case-1-Vulnerability-OJS/issues/8
+
+My account also authored setup/documentation commits in that repository. The historical repository contains lab credentials and infrastructure values, so this portfolio does not reproduce those values. See [`docs/LAB_SETUP.md`](./docs/LAB_SETUP.md) for the sanitized setup story.
 
 ## Findings attributed to me in the final report
 
@@ -63,18 +72,30 @@ Selected commits authored by `syifaniads` in the original team repositories:
   https://github.com/dso-1/Pertemuan-4-Analisis-OWASP-Risk-Scoring/commit/70b77bfcdbdef4ef1384f35670d4c52d3eaf8fab
 - Meeting 5 — final repository cross-linking:  
   https://github.com/dso-1/Pertemuan-5-Finalisasi-Laporan-Rekomendasi-Mitigasi/commit/6a1085e82060f8acf873e7d7ffea039888d8eff3
+- Broader DevSecOps project — presentation contribution:  
+  https://github.com/dso-1/project/commit/961df611d3c6fa2b708e93c054148c19379d5098
 
 For broader history, GitHub's author filter can be used on each original repository.
 
+## Related group engineering work
+
+The organization contains additional group projects beyond the five OJS assessment repositories:
+
+- `dso-1/project` — Jenkins/Docker deployment work plus application code and CI/CD architecture material;
+- `dso-1/kelompok1_website` — the Go Reserve room-reservation application;
+- `dso-1/sast-llm` — an LLM-vs-Semgrep SAST comparison project.
+
+My GitHub account has a presentation commit in `dso-1/project`. GitHub's author filter did **not** return commits by `syifaniads` in `kelompok1_website` or `sast-llm`, so those two repositories are referenced as team/course output rather than claimed as my individual code contribution.
+
+See [`docs/ORIGINAL_ARTIFACT_INVENTORY.md`](./docs/ORIGINAL_ARTIFACT_INVENTORY.md) for the full repository boundary.
+
 ## Team attribution
 
-The original team artifacts distribute work across coordination, SAST, DAST, and documentation/reporting responsibilities. My kickoff-role entry records **Security Engineer (SAST)**, while I also acted as **Ketua Kelompok / Group Lead** for the team.
+The original team artifacts distribute work across coordination, SAST, DAST, documentation/reporting, and broader DevSecOps engineering responsibilities. This portfolio therefore distinguishes between:
 
-This portfolio therefore distinguishes between:
-
-- **team output** — collaborative findings, scans, reports, and final mitigation artifacts;
+- **team output** — collaborative findings, scans, reports, application code, and final mitigation artifacts;
 - **my leadership contribution** — coordination, continuity between stages, and delivery oversight;
-- **my technical contribution** — directly attributable SAST/API/authentication-analysis work and selected findings.
+- **my technical contribution** — directly attributable setup, SAST/API/authentication-analysis work, documentation, and selected findings.
 
 That separation is intentional so a reviewer can evaluate both leadership and hands-on security work without treating every team artifact as individually authored.
 
