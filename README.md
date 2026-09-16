@@ -5,9 +5,26 @@
 [![OWASP](https://img.shields.io/badge/reference-OWASP-orange)](./METHODOLOGY.md)
 [![CVSS](https://img.shields.io/badge/risk-CVSS%20v3.1-informational)](./RISK_REGISTER.md)
 
-A portfolio case study of an **authorized vulnerability assessment of Open Journal Systems (OJS)** performed in a controlled university lab. The project covers the full security-assessment lifecycle: lab setup, scope definition, reconnaissance, attack-surface mapping, threat modeling, SAST, DAST, manual validation, risk scoring, mitigation planning, and re-testing.
+A portfolio case study of an **authorized vulnerability assessment of Open Journal Systems (OJS)** performed in a controlled university lab. The project covers lab setup, attack-surface mapping, CIA/STRIDE threat modeling, SAST, DAST, manual validation, CVSS-based risk treatment, mitigation planning, and re-testing.
 
 > **Portfolio note:** this repository is a curated and sanitized presentation of collaborative work originally completed across the `dso-1` organization repositories. It does not claim the entire assessment as solo work. My individual role and verifiable contribution links are documented in [CONTRIBUTIONS.md](./CONTRIBUTIONS.md).
+
+<p align="center">
+  <img src="./docs/assets/assessment-architecture.svg" alt="Evidence-derived OJS DevSecOps security assessment architecture" width="100%" />
+</p>
+
+The visual above is reconstructed from the repository's documented architecture, assessment workflow, tooling, and verification artifacts. It is **not a fabricated production screenshot** and deliberately omits lab addresses, credentials, and session data.
+
+## Senior technical review path
+
+A reviewer who wants to validate the engineering rather than only read the summary can follow this path:
+
+1. **System boundary:** [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) — OJS, Apache/PHP, authentication/session flow, REST API, file handling, database and file-system trust boundaries.
+2. **Threat reasoning:** [docs/THREAT_MODEL.md](./docs/THREAT_MODEL.md) — CIA/STRIDE mapping and trust-boundary analysis.
+3. **Test design:** [docs/TEST_MATRIX.md](./docs/TEST_MATRIX.md) + [METHODOLOGY.md](./METHODOLOGY.md) — what was tested, how, and with which evidence level.
+4. **Executable security artifacts:** [custom Semgrep rules](./artifacts/semgrep/custom_rules.yaml) and [sanitized Jenkins pipeline](./artifacts/ci-cd/Jenkinsfile.example).
+5. **Risk treatment:** [FINDINGS.md](./FINDINGS.md) → [RISK_REGISTER.md](./RISK_REGISTER.md) → [MITIGATION.md](./MITIGATION.md).
+6. **Verification & provenance:** [VERIFICATION.md](./VERIFICATION.md), [LIMITATIONS.md](./LIMITATIONS.md), [CONTRIBUTIONS.md](./CONTRIBUTIONS.md), and [docs/SOURCE_EVIDENCE.md](./docs/SOURCE_EVIDENCE.md).
 
 ## What a reviewer can inspect quickly
 
@@ -21,14 +38,11 @@ A portfolio case study of an **authorized vulnerability assessment of Open Journ
 | Consolidated findings | [FINDINGS.md](./FINDINGS.md) |
 | CVSS and business-risk treatment | [RISK_REGISTER.md](./RISK_REGISTER.md) |
 | Recommended remediation | [MITIGATION.md](./MITIGATION.md) |
-| Re-testing approach and limitations | [VERIFICATION.md](./VERIFICATION.md) |
-| My specific contribution | [CONTRIBUTIONS.md](./CONTRIBUTIONS.md) |
-| Original repositories and source evidence | [docs/SOURCE_EVIDENCE.md](./docs/SOURCE_EVIDENCE.md) |
-| Complete DevSecOps project ecosystem | [docs/PROJECT_ECOSYSTEM.md](./docs/PROJECT_ECOSYSTEM.md) |
-| Original artifact inventory | [docs/ORIGINAL_ARTIFACT_INVENTORY.md](./docs/ORIGINAL_ARTIFACT_INVENTORY.md) |
-| Curated Semgrep rule artifact | [artifacts/semgrep/custom_rules.yaml](./artifacts/semgrep/custom_rules.yaml) |
-| Sanitized Jenkins deployment example | [artifacts/ci-cd/Jenkinsfile.example](./artifacts/ci-cd/Jenkinsfile.example) |
-| Security / disclosure policy | [SECURITY.md](./SECURITY.md) |
+| Re-testing approach | [VERIFICATION.md](./VERIFICATION.md) |
+| Individual contribution | [CONTRIBUTIONS.md](./CONTRIBUTIONS.md) |
+| Source provenance | [docs/SOURCE_EVIDENCE.md](./docs/SOURCE_EVIDENCE.md) |
+| Semgrep artifact | [artifacts/semgrep/custom_rules.yaml](./artifacts/semgrep/custom_rules.yaml) |
+| CI/CD example | [artifacts/ci-cd/Jenkinsfile.example](./artifacts/ci-cd/Jenkinsfile.example) |
 
 ## Assessment lifecycle
 
@@ -37,102 +51,75 @@ flowchart LR
     A[Build / Validate OJS Lab] --> B[Scope & Rules of Engagement]
     B --> C[Reconnaissance]
     C --> D[Attack Surface Mapping]
-    D --> E[Threat Modeling]
+    D --> E[CIA + STRIDE Threat Model]
     E --> F[SAST]
     E --> G[DAST]
     F --> H[Manual Validation]
     G --> H
     H --> I[CVSS + Risk Register]
-    I --> J[Mitigation Plan]
-    J --> K[Re-testing / Verification]
+    I --> J[Mitigation]
+    J --> K[Re-test / Verification]
 ```
 
-## Environment and scope
+## Environment and attack surface
 
-The assessment targeted **OJS 3.3.0-8** in a lab environment using Apache, PHP, and MariaDB/MySQL. Testing focused on public application endpoints, authentication/session behavior, file-upload paths, REST API exposure, web-server configuration, third-party components, and selected source-code paths.
+The assessment targeted **OJS 3.3.0-8** in a lab environment using Apache, PHP, and MariaDB/MySQL. Review areas included:
 
-The engagement explicitly avoided destructive activity: no intentional denial of service, no destructive modification, and no full extraction of sensitive data. The work used a grey-box approach and followed responsible-testing constraints.
+- authentication, password-verification, session and role flows;
+- REST API authorization and information exposure;
+- article submission, upload and file-management paths;
+- administrative and plugin functionality;
+- database, file-system, template/output and OS-interaction trust boundaries;
+- web-server, cookie and transport-security configuration.
 
-## Tooling
+The engagement explicitly avoided destructive activity: no intentional denial of service, destructive modification, or bulk extraction of sensitive data. The work used a grey-box approach and responsible-testing constraints.
 
-**SAST / source review**
+## Security tooling and why it was used
 
-- Semgrep
-- custom Semgrep rules
-- PHP_CodeSniffer / security-oriented code review
-- manual review of authorization, database, file-management, plugin, and template-rendering paths
+| Layer | Tools / technique | Purpose |
+|---|---|---|
+| Source analysis | Semgrep, custom Semgrep rules, PHP-oriented manual review | Identify dangerous sinks, authorization mistakes and data-flow concerns |
+| Web reconnaissance | WhatWeb, Gobuster, Nikto | Inventory exposed behavior and server/application surface |
+| Dynamic testing | OWASP ZAP, SQLMap | Probe selected runtime weaknesses in the controlled target |
+| Manual validation | Burp Suite, Postman, curl | Reproduce and distinguish real behavior from scanner-only signals |
+| Risk analysis | CVSS v3.1 + risk register | Separate technical severity from remediation priority |
+| Verification | targeted re-testing | Determine whether mitigations address the tested condition |
 
-**DAST / recon / validation**
-
-- OWASP ZAP
-- Nikto
-- SQLMap
-- Gobuster
-- WhatWeb
-- Burp Suite / Postman / curl for selected manual checks
-
-**Risk analysis**
-
-- CVSS v3.1
-- OWASP-oriented likelihood × impact prioritization
-- risk register and mitigation roadmap
+Automated scanner output was treated as **input to validation**, not automatically as a confirmed vulnerability.
 
 ## Key assessment themes
 
-The project identified recurring risk themes in authentication protection, access control, server hardening, transport security, cookie configuration, information disclosure, and potentially dangerous source-code primitives. The canonical detailed finding IDs used in this portfolio are taken from the report's detailed findings section (`VUL-001` through `VUL-015`).
+The project identified recurring risk themes in authentication protection, access control, server hardening, transport security, cookie configuration, information disclosure, and potentially dangerous source-code primitives. The canonical detailed finding IDs in this portfolio are taken from the report's detailed findings section (`VUL-001` through `VUL-015`).
 
-A senior reviewer should note that the original team report contains **internal inconsistencies between its executive-summary counts, detailed CVSS severities, risk-priority table, and patch-verification numbering**. This portfolio does not silently rewrite those records. Instead, [RISK_REGISTER.md](./RISK_REGISTER.md) separates **technical severity (CVSS)** from **business priority**, and [VERIFICATION.md](./VERIFICATION.md) explicitly documents the numbering mismatch in the original appendix.
+The original team report contains internal inconsistencies between executive-summary counts, detailed CVSS severities, risk-priority tables, and patch-verification numbering. This portfolio does not silently normalize those records. [RISK_REGISTER.md](./RISK_REGISTER.md) separates **technical severity** from **business priority**, while [VERIFICATION.md](./VERIFICATION.md) documents the retained numbering mismatch.
 
-## My role
+## My role and attribution
 
-I served as **Group Lead (Ketua Kelompok) and Security Engineer (SAST)** within a seven-person team.
+I served as **Group Lead (Ketua Kelompok) and Security Engineer (SAST)** within a seven-person team. My technical work focused on OJS lab setup/documentation, source-code analysis, REST API and admin attack-surface review, authentication data-flow analysis, vulnerability documentation, and contributions to SAST/DAST and final reporting artifacts.
 
-My leadership responsibilities included coordinating the team's assessment stages, keeping deliverables aligned across meetings, reviewing progress and documentation, and helping consolidate outputs into the final assessment package. My technical work focused on OJS lab setup/documentation, source-code analysis, REST API and admin attack-surface review, authentication data-flow analysis, vulnerability documentation, and contributions to SAST/DAST and final reporting artifacts.
-
-The original kickoff role matrix records my technical role as **Security Engineer (SAST)**. The same matrix separately labels another teammate as **Project Lead / Scrum Master**; this portfolio uses **Ketua Kelompok / Group Lead** to describe my team-coordination responsibility while keeping that original role matrix linked for transparency.
-
-Examples of findings attributed to me in the final report include:
+Examples of findings attributed to me in the retained final report include:
 
 - `VUL-002` — Information Disclosure / User API Exposure
 - `VUL-013` — `phpinfo()` Exposure
 - `VUL-014` — Potential Insecure Deserialization
 - `VUL-015` — Potential Command Injection (`exec` / `popen`)
 
-## Curated technical artifacts
+The original kickoff matrix separately identifies another teammate as **Project Lead / Scrum Master**. This portfolio therefore uses **Group Lead / Ketua Kelompok** for my coordination role and retains the original source mapping rather than rewriting team history.
 
-- [`artifacts/semgrep/custom_rules.yaml`](./artifacts/semgrep/custom_rules.yaml) — PHP Semgrep rules used for source-review patterns.
-- [`artifacts/ci-cd/Jenkinsfile.example`](./artifacts/ci-cd/Jenkinsfile.example) — sanitized example of the team's build/deploy/verify workflow.
+Some work was also performed from a shared/other team laptop, so local Git author identity is not treated as the only contribution signal. The attribution model is documented in [CONTRIBUTIONS.md](./CONTRIBUTIONS.md).
 
-## Broader DevSecOps project ecosystem
+## Broader DevSecOps ecosystem
 
-The OJS assessment was one workstream inside a broader collaborative project. I split the related work into separate portfolio case studies so each engineering story is easy to review:
+This assessment was one workstream inside a larger collaborative project. Related case studies are intentionally separated so a reviewer can inspect each engineering story independently:
 
-- **Go Reserve DevSecOps Platform** — https://github.com/syifaniads/go-reserve-devsecops-platform  
-  Collaborative TanStack Start / TypeScript / Prisma / PostgreSQL room-reservation application with Docker and Jenkins delivery artifacts.
-- **LLM vs Semgrep SAST Comparison** — https://github.com/syifaniads/llm-semgrep-sast-comparison  
-  Collaborative security-tooling experiment with an LLM analyzer, custom Semgrep rules, vulnerable fixtures, normalization and comparison logic.
+- **Go Reserve DevSecOps Platform** — application/container/CI-CD delivery case study.
+- **LLM vs Semgrep SAST Comparison** — security-tooling experiment comparing an LLM analyzer with Semgrep-based detection.
 
-The original organization sources remain:
+The original organization repositories remain linked in [docs/PROJECT_ECOSYSTEM.md](./docs/PROJECT_ECOSYSTEM.md) and [docs/SOURCE_EVIDENCE.md](./docs/SOURCE_EVIDENCE.md).
 
-- https://github.com/dso-1/project
-- https://github.com/dso-1/kelompok1_website
-- https://github.com/dso-1/sast-llm
+## Limitations and production context
 
-See [docs/PROJECT_ECOSYSTEM.md](./docs/PROJECT_ECOSYSTEM.md) for the relationship among these workstreams.
-
-## Commit-attribution caveat
-
-Some project work was performed from a **shared / other team laptop**. In those cases, the local Git author identity can reflect the laptop's Git configuration rather than the person who actually performed the work. As a result, filtering GitHub history only by `author:syifaniads` can undercount my contribution.
-
-This portfolio therefore uses multiple evidence types: direct commits under my account, assigned issues, report-level attribution, artifact ownership, and team-level project history. I do **not** reassign a specific commit recorded under another person's identity to myself unless there is an independent basis for doing so.
-
-## Repository design
-
-This repository intentionally does not mirror the entire OJS codebase or every raw scanner artifact. It is structured as an engineering case study: concise findings, methodology, evidence links, sanitized examples, and explicit attribution. Related application and security-tooling work now live in separate personal portfolio repositories linked above.
-
-## Ethical and security note
-
-All testing described here was performed against an authorized lab target. Host addresses, credentials, session values, and other operational secrets are intentionally omitted from this portfolio. Do not use the techniques documented here against systems without explicit authorization.
+This is an **authorized academic security assessment**, not a claim of production penetration-testing coverage. Raw secrets, host addresses, session values and operational credentials are intentionally excluded. Findings marked potential or scanner-derived remain distinct from manually reproduced conditions. See [LIMITATIONS.md](./LIMITATIONS.md) for the complete boundary.
 
 ---
 
