@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760" role="img" aria-labelledby="title desc">
+  <title id="title">OJS DevSecOps security assessment architecture</title>
+  <desc id="desc">Evidence-derived view of the authorized OJS lab, attack surfaces, security tooling, risk analysis and verification loop.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-opacity="0.24"/></filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#94a3b8"/></marker>
+    <style>
+      .title{font:700 34px Inter,Segoe UI,sans-serif;fill:#f8fafc}.sub{font:400 16px Inter,Segoe UI,sans-serif;fill:#94a3b8}.h{font:700 18px Inter,Segoe UI,sans-serif;fill:#f8fafc}.t{font:500 14px Inter,Segoe UI,sans-serif;fill:#cbd5e1}.small{font:500 12px Inter,Segoe UI,sans-serif;fill:#94a3b8}.box{rx:18;filter:url(#shadow)}.line{stroke:#94a3b8;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1400" height="760" fill="url(#bg)"/>
+  <text x="70" y="65" class="title">OJS DevSecOps Security Assessment</text>
+  <text x="70" y="94" class="sub">Evidence-derived from the documented OJS 3.3.0-8 lab, attack-surface review, SAST/DAST workflow and verification records</text>
+
+  <rect x="70" y="150" width="250" height="150" fill="#172554" stroke="#3b82f6" class="box"/>
+  <text x="95" y="185" class="h">Client / Test Traffic</text>
+  <text x="95" y="218" class="t">Public + authenticated flows</text>
+  <text x="95" y="246" class="t">Burp · curl · Postman</text>
+  <text x="95" y="274" class="t">ZAP · Nikto · Gobuster</text>
+
+  <rect x="400" y="135" width="300" height="180" fill="#1f2937" stroke="#8b5cf6" class="box"/>
+  <text x="425" y="172" class="h">OJS Application Boundary</text>
+  <text x="425" y="206" class="t">Apache + PHP + OJS 3.3.0-8</text>
+  <text x="425" y="235" class="t">Auth / session · REST API</text>
+  <text x="425" y="264" class="t">Submission / upload workflows</text>
+  <text x="425" y="293" class="t">Admin + plugin functionality</text>
+
+  <rect x="785" y="135" width="240" height="180" fill="#17202a" stroke="#14b8a6" class="box"/>
+  <text x="810" y="172" class="h">State Boundaries</text>
+  <text x="810" y="208" class="t">MariaDB / MySQL</text>
+  <text x="810" y="238" class="t">File storage</text>
+  <text x="810" y="268" class="t">Session / role state</text>
+  <text x="810" y="298" class="small">Sanitized: no internal addresses</text>
+
+  <rect x="1100" y="135" width="230" height="180" fill="#2a1f17" stroke="#f59e0b" class="box"/>
+  <text x="1125" y="172" class="h">SAST Review</text>
+  <text x="1125" y="208" class="t">Semgrep + custom rules</text>
+  <text x="1125" y="238" class="t">Manual PHP source review</text>
+  <text x="1125" y="268" class="t">Auth / API / dangerous sinks</text>
+  <text x="1125" y="298" class="small">exec · popen · deserialization</text>
+
+  <path d="M320 225 L400 225" class="line"/>
+  <path d="M700 225 L785 225" class="line"/>
+  <path d="M1100 225 L1025 225" class="line"/>
+
+  <rect x="160" y="400" width="1080" height="250" fill="#111827" stroke="#334155" class="box"/>
+  <text x="195" y="440" class="h">Assessment & Verification Pipeline</text>
+
+  <rect x="200" y="480" width="155" height="95" fill="#172554" stroke="#3b82f6" rx="14"/>
+  <text x="220" y="515" class="h">Scope</text><text x="220" y="544" class="small">Lab + ROE</text>
+  <rect x="390" y="480" width="155" height="95" fill="#27203b" stroke="#8b5cf6" rx="14"/>
+  <text x="410" y="515" class="h">Model</text><text x="410" y="544" class="small">CIA + STRIDE</text>
+  <rect x="580" y="480" width="155" height="95" fill="#2a1f17" stroke="#f59e0b" rx="14"/>
+  <text x="600" y="515" class="h">Validate</text><text x="600" y="544" class="small">SAST + DAST + manual</text>
+  <rect x="770" y="480" width="155" height="95" fill="#2b1721" stroke="#ef4444" rx="14"/>
+  <text x="790" y="515" class="h">Prioritize</text><text x="790" y="544" class="small">CVSS + risk register</text>
+  <rect x="960" y="480" width="200" height="95" fill="#15261f" stroke="#22c55e" rx="14"/>
+  <text x="980" y="515" class="h">Mitigate & Re-test</text><text x="980" y="544" class="small">Verification + limitations</text>
+
+  <path d="M355 527 L390 527" class="line"/><path d="M545 527 L580 527" class="line"/><path d="M735 527 L770 527" class="line"/><path d="M925 527 L960 527" class="line"/>
+
+  <text x="195" y="616" class="small">Reviewer path: architecture → threat model → test matrix → findings → risk register → mitigation → verification → source evidence</text>
+  <text x="70" y="715" class="small">This is a sanitized portfolio diagram reconstructed from repository evidence; it is not a production screenshot or a claim of sole authorship.</text>
+</svg>
